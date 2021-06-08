@@ -1,35 +1,45 @@
 package com.frsumiya.proway_projeto.entities;
 
-public class Cliente {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table (name="tb_cliente")
+public class Cliente implements Serializable {
+
+	private static final long serialVersionUID = 1L; 
 	
-	
-//atributos do cliente.
+	@Id
+	@GeneratedValue (strategy  = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String cpf;
 	private String telefone;
 	private Integer score;
 	
-	
-	
+
 	public Cliente() {
 		
 	}
 
-	
-	public Cliente(String nome, String cpf, String telefone, Integer score) {
+	public Cliente(Long id , String nome, String cpf, String telefone, Integer score) {
 		super();
+		this.id =id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.score = score;
-	}
-	
+	}	
 	
 	public Long getId() {
 		return id;
 	}
-
 
 
 	public void setId(Long id) {

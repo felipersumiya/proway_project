@@ -1,8 +1,21 @@
 package com.frsumiya.proway_projeto.entities;
 
-public class PropostaCredito {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="tb_proposta_credito")
+public class PropostaCredito implements Serializable {
+
+	private static final long serialVersionUID = 1L; 
 	
-	
+	@Id
+	@GeneratedValue (strategy  = GenerationType.IDENTITY)
 	private Long id;
 	private Double taxaJuros;
 	private Double valor;
