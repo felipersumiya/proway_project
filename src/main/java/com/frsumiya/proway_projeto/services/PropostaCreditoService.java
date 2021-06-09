@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.frsumiya.proway_projeto.entities.Cliente;
 import com.frsumiya.proway_projeto.entities.PropostaCredito;
+import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
 import com.frsumiya.proway_projeto.repositories.ClienteRepository;
 import com.frsumiya.proway_projeto.repositories.PropostaCreditoRepository;
 
@@ -31,32 +32,78 @@ public class PropostaCreditoService {
 
 	}
 	
+	//retorna a lista de propostas de crédito pessoal com base na saúde financeira do cliente.
+	//* Criei meus próprios parâmetros para definir a saúde financeira do cliente, divididos em : boa, média e ruim, representados pelos valores de enum (SaudeFinanceira) BOA, MEDIA e RUIM respectivamente.
 	public List<PropostaCredito> findPropostas(Long idCliente){
 		
 		//talvez sejam duas listas                                                                                                                                                                                                                                                                                                                                     
-		List<PropostaCredito> list = new ArrayList<>();
-		list = propostaRepository.findAll();
+		List<PropostaCredito> listPropostas = new ArrayList<>();
+		listPropostas = propostaRepository.findAll();
 		
 		//recupera o cliente logado.
 		Cliente cliente = new Cliente();
 		cliente = clienteRepository.getById(idCliente);
 		//verificar logica
-		for(PropostaCredito x : list) {
+		List<PropostaCredito> listRetorno = new ArrayList<>();
+		
+		
+		//A lista será populada de acordo com a saúde financeira do cliente
+		
+		
+		if(cliente.getSaudeFinanceira() == SaudeFinanceira.BOA.toString()) {
 			
-					if(cliente.getScore() > 500) {
-						
-						if (x.getValor() > 5000 ) {
-							
-								list.add(x);
-						}
-						
-	
-					}
+			//popular a lista
+			for(PropostaCredito x : listPropostas) {
+				
+				if(x.getSaudeF() == SaudeFinanceira.BOA.toString()) {
+					listRetorno.add(x);
+				}
+				
+				
+			}
+			
 		
 		}
-		
-		return list;
+			
+			
+		if(cliente.getSaudeFinanceira() == SaudeFinanceira.MEDIA.toString()) {
+			
 
+			//popular a lista
+			for(PropostaCredito x : listPropostas) {
+				
+				if(x.getSaudeF() == SaudeFinanceira.MEDIA.toString()) {
+					listRetorno.add(x);
+				}
+				
+				
+			}
+			
+		}
+			
+			
+			
+			
+		if(cliente.getSaudeFinanceira() == SaudeFinanceira.RUIM.toString()) {
+			
+
+			//popular a lista
+			for(PropostaCredito x : listPropostas) {
+				
+				if(x.getSaudeF() == SaudeFinanceira.RUIM.toString()) {
+					listRetorno.add(x);
+				}
+				
+				
+			}
+			
+		}
+			
+			
+
+		return listRetorno;	
+			
+		
 	}
 
 }
