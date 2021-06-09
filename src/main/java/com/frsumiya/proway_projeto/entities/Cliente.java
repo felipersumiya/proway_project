@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
+
 
 @Entity
 @Table (name="tb_cliente")
@@ -22,6 +24,7 @@ public class Cliente implements Serializable {
 	private String cpf;
 	private String telefone;
 	private Integer score;
+	private String saudeFinanceira;
 	
 
 	public Cliente() {
@@ -35,6 +38,26 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.score = score;
+		
+		
+		
+		//Definir a saúde financeira com base no score do cliente
+		if(this.score > 700) {
+			
+			this.saudeFinanceira = SaudeFinanceira.BOA.toString();
+		}
+			
+		if(this.score <= 700 && this.score >= 400) {
+			
+			this.saudeFinanceira = SaudeFinanceira.MEDIA.toString();
+			
+		}
+			
+		if(this.score < 400) {
+			
+			
+			this.saudeFinanceira = SaudeFinanceira.RUIM.toString();
+		}
 	}	
 	
 	public Long getId() {
@@ -63,7 +86,6 @@ public class Cliente implements Serializable {
 	}
 
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
@@ -88,9 +110,17 @@ public class Cliente implements Serializable {
 		this.score = score;
 	}
 
+	
 
 	
-	
+	public String getSaudeFinanceira() {
+		return saudeFinanceira;
+	}
+
+	public void setSaudeFinanceira(String saudeFinanceira) {
+		this.saudeFinanceira = saudeFinanceira;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,7 +128,6 @@ public class Cliente implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 
 	@Override

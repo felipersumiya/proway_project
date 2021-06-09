@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
+
 @Entity
 @Table (name="tb_proposta_credito")
 public class PropostaCredito implements Serializable {
@@ -22,6 +24,7 @@ public class PropostaCredito implements Serializable {
 	private Double cet;
 	private Integer prazo;
 	private Double parcelas;
+	private String  saudeF;
 	
 	
 	public PropostaCredito() {
@@ -37,8 +40,27 @@ public class PropostaCredito implements Serializable {
 		this.cet = cet;
 		this.prazo = prazo;
 		this.parcelas = parcelas;
-	}
+		
 
+		//Definir para qual saúde financeira será designado cada valor de empréstimo pessoal.
+		if(this.valor > 9000.0) {
+			
+			this.saudeF = SaudeFinanceira.BOA.toString();
+		}
+			
+		if(this.valor <= 9000.0 && this.valor >= 5000.0) {
+			
+			this.saudeF = SaudeFinanceira.MEDIA.toString();
+			
+		}
+			
+		if(this.valor <5000.0) {
+			
+			
+			this.saudeF = SaudeFinanceira.RUIM.toString();
+		}
+		
+	}
 
 
 	public Long getId() {
@@ -98,6 +120,18 @@ public class PropostaCredito implements Serializable {
 
 	public void setParcelas(Double parcelas) {
 		this.parcelas = parcelas;
+	}
+	
+	
+
+
+	public String getSaudeF() {
+		return saudeF;
+	}
+
+
+	public void setSaudeF(String saudeF) {
+		this.saudeF = saudeF;
 	}
 
 
