@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.frsumiya.proway_projeto.entities.Cliente;
 import com.frsumiya.proway_projeto.entities.PropostaCredito;
@@ -12,12 +13,15 @@ import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
 import com.frsumiya.proway_projeto.repositories.ClienteRepository;
 import com.frsumiya.proway_projeto.repositories.PropostaCreditoRepository;
 
+
+@Service
 public class PropostaCreditoService {
 	
 	@Autowired
 	private PropostaCreditoRepository propostaRepository;
 	
-	private ClienteRepository clienteRepository;
+	//@Autowired
+	//private ClienteService clienteService;
 	
 	public List<PropostaCredito> findAll() {
 
@@ -34,7 +38,7 @@ public class PropostaCreditoService {
 	
 	//retorna a lista de propostas de crédito pessoal com base na saúde financeira do cliente.
 	//* Criei meus próprios parâmetros para definir a saúde financeira do cliente, divididos em : boa, média e ruim, representados pelos valores de enum (SaudeFinanceira) BOA, MEDIA e RUIM respectivamente.
-	public List<PropostaCredito> findPropostas(Long idCliente){
+/**	public List<PropostaCredito> findPropostas(Long idCliente){
 		
 		//talvez sejam duas listas                                                                                                                                                                                                                                                                                                                                     
 		List<PropostaCredito> listPropostas = new ArrayList<>();
@@ -42,7 +46,9 @@ public class PropostaCreditoService {
 		
 		//recupera o cliente logado.
 		Cliente cliente = new Cliente();
-		cliente = clienteRepository.getById(idCliente);
+		cliente = clienteService.findById(idCliente);
+		
+	
 		//verificar logica
 		List<PropostaCredito> listRetorno = new ArrayList<>();
 		
@@ -104,6 +110,6 @@ public class PropostaCreditoService {
 		return listRetorno;	
 			
 		
-	}
+	}**/
 
 }

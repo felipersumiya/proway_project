@@ -1,12 +1,15 @@
 package com.frsumiya.proway_projeto.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
 
@@ -25,6 +28,10 @@ public class Cliente implements Serializable {
 	private String telefone;
 	private Integer score;
 	private String saudeFinanceira;
+	
+	
+	//@OneToMany(mappedBy = "id.order")
+	//private List<PropostaCredito> propostas = new ArrayList<>();
 	
 
 	public Cliente() {
@@ -110,9 +117,7 @@ public class Cliente implements Serializable {
 		this.score = score;
 	}
 
-	
 
-	
 	public String getSaudeFinanceira() {
 		return saudeFinanceira;
 	}
@@ -120,6 +125,16 @@ public class Cliente implements Serializable {
 	public void setSaudeFinanceira(String saudeFinanceira) {
 		this.saudeFinanceira = saudeFinanceira;
 	}
+	
+	
+	
+	//public List<PropostaCredito> getPropostas() {
+		
+	//	return propostas;
+		
+	//}
+	
+	
 
 	@Override
 	public int hashCode() {
