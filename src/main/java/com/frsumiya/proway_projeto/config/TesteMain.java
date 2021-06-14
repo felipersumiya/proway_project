@@ -46,7 +46,13 @@ public class TesteMain implements CommandLineRunner{
 		PropostaCredito pc3 = new PropostaCredito(null, 2.5 , 5000.0 , 7000.0 , 8 , 625.0);
 		PropostaCredito pc4 = new PropostaCredito(null, 5.5 , 7000.0 , 8000.0 , 10 , 400.0);
 		PropostaCredito pc5 = new PropostaCredito(null, 5.5 , 9000.0 , 10000.0 , 10 , 400.0);
-	
+		
+		c1.setProposta(pc5);
+		pc5.setCliente(c1);
+		
+		c2.setProposta(pc3);
+		pc3.setCliente(c2);
+  	
 	
 		
 		clienteRepository.saveAll(Arrays.asList(c1,c2,c3,c4,c5,c6,c7));

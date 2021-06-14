@@ -29,6 +29,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(list);		
 	}
 	
+	//Este método retornará uma lista de propostas baseadas na saúde financeira do cliente, identificado pelo ID.
 	@GetMapping (value = "/{id}")
 	public ResponseEntity<List<PropostaCredito>> findById(@PathVariable Long id ){
 		

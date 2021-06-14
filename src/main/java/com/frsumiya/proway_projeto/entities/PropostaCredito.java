@@ -2,10 +2,13 @@ package com.frsumiya.proway_projeto.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
@@ -25,6 +28,11 @@ public class PropostaCredito implements Serializable {
 	private Integer prazo;
 	private Double parcelas;
 	private String  saudeF;
+	
+	@OneToOne //(mappedBy = "proposta", cascade = CascadeType.ALL )
+	@ManyToMany(mappedBy =  "proposta")
+	
+	private Cliente  cliente;
 	
 	
 	public PropostaCredito() {
@@ -132,6 +140,17 @@ public class PropostaCredito implements Serializable {
 
 	public void setSaudeF(String saudeF) {
 		this.saudeF = saudeF;
+	}
+	
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

@@ -1,16 +1,18 @@
 package com.frsumiya.proway_projeto.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
 
 
@@ -28,6 +30,13 @@ public class Cliente implements Serializable {
 	private String telefone;
 	private Integer score;
 	private String saudeFinanceira;
+	
+	@JsonIgnore
+	@OneToOne (cascade = CascadeType.ALL)
+	@JoinTable (name = "tb_cliente_proposta",
+	joinColumns = @JoinColumn (name="cliente_id") ,
+	inverseJoinColumns = @JoinColumn (name="proposta_id"))
+	private PropostaCredito proposta;
 	
 	
 	//@OneToMany(mappedBy = "id.order")
@@ -127,14 +136,13 @@ public class Cliente implements Serializable {
 	}
 	
 	
-	
-	//public List<PropostaCredito> getPropostas() {
-		
-	//	return propostas;
-		
-	//}
-	
-	
+	public PropostaCredito getProposta() {
+		return proposta;
+	}
+
+	public void setProposta(PropostaCredito proposta) {
+		this.proposta = proposta;
+	}
 
 	@Override
 	public int hashCode() {
