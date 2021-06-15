@@ -32,7 +32,7 @@ private PropostaCreditoService propostaService;
 	@GetMapping (value = "/{id}")
 	public ResponseEntity<PropostaCredito> findById(@PathVariable Long id ){
 		
-		//List<PropostaCredito> list2 = propostaService.findPropostas(id);
+	
 		PropostaCredito obj = propostaService.findById(id);
 		
 		return ResponseEntity.ok().body(obj);

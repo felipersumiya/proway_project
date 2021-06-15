@@ -30,8 +30,7 @@ public class PropostaCredito implements Serializable {
 	private String  saudeF;
 	
 	@OneToOne //(mappedBy = "proposta", cascade = CascadeType.ALL )
-	@ManyToMany(mappedBy =  "proposta")
-	
+	//@ManyToMany(mappedBy =  "proposta")
 	private Cliente  cliente;
 	
 	

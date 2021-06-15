@@ -39,9 +39,6 @@ public class Cliente implements Serializable {
 	private PropostaCredito proposta;
 	
 	
-	//@OneToMany(mappedBy = "id.order")
-	//private List<PropostaCredito> propostas = new ArrayList<>();
-	
 
 	public Cliente() {
 		
