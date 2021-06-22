@@ -1,16 +1,21 @@
 package com.frsumiya.proway_projeto.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.dom4j.dtd.AttributeDecl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.frsumiya.proway_projeto.dto.ClienteDto;
 import com.frsumiya.proway_projeto.dto.PropostaCreditoDto;
@@ -34,8 +39,6 @@ public class ClienteResource {
 		
 		List<ClienteDto> listDto = list.stream().map( x -> new ClienteDto(x)).collect(Collectors.toList());
 		
-		
-
 		return ResponseEntity.ok().body(listDto);		
 	}
 	
@@ -50,7 +53,7 @@ public class ClienteResource {
 
 	}
 	
-	//Este método retornará uma lista de propostas baseadas na saúde financeira do cliente, identificado pelo ID.
+	//Este método retornará uma lista de propostas baseadas na saúde financeira do cliente.
 	@GetMapping (value = "/propostas/{id}")
 	public ResponseEntity<List<PropostaCreditoDto>> findById(@PathVariable Long id ){
 		
@@ -60,6 +63,37 @@ public class ClienteResource {
 		//Cliente obj = clienteService.findById(id);
 		
 		return ResponseEntity.ok().body(listDto);
+	}
+	
+	
+	@PostMapping
+	public ResponseEntity<Void> insertDTO( @RequestBody ClienteDto clienteDto){
+		
+		Cliente cliente = clienteService.fromDTO(clienteDto);
+		clienteService.insert(cliente);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteDto.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build();
+		
+	}
+	
+	@RequestMapping (method = RequestMethod.DELETE, value = "/{id}")
+	public ResponseEntity<Void> delete( @PathVariable Long id) {
+		
+		clienteService.delete(id);
+		
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping (value = "/{id}")
+	public ResponseEntity<Void> update( @RequestBody ClienteDto clienteDto,@PathVariable Long id ){
+		
+		Cliente cliente = clienteService.fromDTO(clienteDto);
+		cliente.setId(id);
+		clienteService.update(id, cliente);
+		return ResponseEntity.noContent().build();
+		
 	}
 	
 

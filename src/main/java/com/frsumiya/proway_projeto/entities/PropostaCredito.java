@@ -2,6 +2,7 @@ package com.frsumiya.proway_projeto.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
 import com.frsumiya.proway_projeto.services.PropostaCreditoService;
 
 @Entity
@@ -30,8 +28,7 @@ public class PropostaCredito implements Serializable {
 	private Double parcelas;
 	private String  saudeF;
 	
-	@OneToOne //(mappedBy = "proposta", cascade = CascadeType.ALL )
-	//@ManyToMany(mappedBy =  "proposta")
+	@OneToOne(mappedBy = "proposta" ,cascade = CascadeType.ALL)
 	private Cliente  cliente;
 	
 	
@@ -164,6 +161,4 @@ public class PropostaCredito implements Serializable {
 		return true;
 	}
 	
-
-
 }

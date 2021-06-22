@@ -48,6 +48,47 @@ public class PropostaCreditoService {
 	
 	
 	
+	public PropostaCredito insert(PropostaCredito proposta) {
+		
+		return propostaRepository.save(proposta);
+		
+	}
+	
+	public void delete(Long id) {
+		
+		propostaRepository.deleteById(id);
+		
+	}
+	
+	public void update(Long id, PropostaCredito newProposta) {
+		
+		try {
+			
+			PropostaCredito proposta = propostaRepository.getById(id);
+			updateData(proposta, newProposta);
+			propostaRepository.save(proposta);
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		
+		
+		}	
+	}
+	
+	public void updateData(PropostaCredito  proposta, PropostaCredito newProposta) {
+			
+		proposta.setTaxaJuros(newProposta.getTaxaJuros());
+		proposta.setValor(newProposta.getValor());
+		proposta.setCet(newProposta.getCet());
+		proposta.setPrazo(newProposta.getPrazo());
+		proposta.setParcelas(newProposta.getParcelas());
+		proposta.setSaudeF(newProposta.getSaudeF());
+					
+	}
+
+	
+	
 	public static String definirSaudeProposta(Double valor) {
 		
 		

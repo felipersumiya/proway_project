@@ -24,10 +24,7 @@ public class TesteMain implements CommandLineRunner{
 	@Autowired
 	private PropostaCreditoRepository propostaCreditoRepository;
 	
-	@Autowired
-	private ClientePropostaRepository clientePropostaRepository;
 	
-
 	// Perfil para execução de testes. 
 	// Insere dados para popular o banco de dados em memória (banco de dados H2)
 	public void run(String... args) throws Exception {
@@ -69,7 +66,7 @@ public class TesteMain implements CommandLineRunner{
 		
 		
 		//Atrelar propostas aos clientes.
-		/**c1.setProposta(pc5);
+		c1.setProposta(pc5);
 		pc5.setCliente(c1);
 		
 		c2.setProposta(pc3);
@@ -80,11 +77,11 @@ public class TesteMain implements CommandLineRunner{
 		
 		c14.setProposta(pc9);
 		pc9.setCliente(c14);
-         **/		
+         		
 		
 		clienteRepository.saveAll(Arrays.asList(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14));
 		propostaCreditoRepository.saveAll(Arrays.asList(pc1,pc2,pc3,pc4,pc5,pc6,pc7,pc8,pc9,pc10,pc11,pc12));
-	
+
 	
 	}
 

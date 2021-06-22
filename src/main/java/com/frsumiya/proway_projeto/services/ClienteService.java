@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.frsumiya.proway_projeto.dto.ClienteDto;
 import com.frsumiya.proway_projeto.entities.Cliente;
@@ -40,6 +43,46 @@ public class ClienteService {
 		return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getCpf(), clienteDto.getTelefone(), clienteDto.getScore());
 		
 	}
+	
+	public Cliente insert(Cliente cliente) {
+		
+		return clienteRepository.save(cliente);
+		
+	}
+	
+	public void delete(Long id) {
+		
+		clienteRepository.deleteById(id);
+		
+	}
+	
+	public void update(Long id, Cliente newCliente) {
+		
+		try {
+			
+			Cliente cliente = clienteRepository.getById(id);
+			updateData(cliente, newCliente);
+			 clienteRepository.save(cliente);
+		
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		
+		
+		}	
+	}
+	
+	public void updateData(Cliente cliente, Cliente newCliente) {
+			
+		cliente.setNome(newCliente.getNome());
+		cliente.setCpf(newCliente.getCpf());
+		cliente.setTelefone(newCliente.getTelefone());
+		cliente.setScore(newCliente.getScore());
+		cliente.setSaudeFinanceira(newCliente.getSaudeFinanceira());
+					
+	}
+
+	
 	
 	public static String defineSaudeCliente(Integer score) {
 		

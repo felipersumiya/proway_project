@@ -41,7 +41,6 @@ public class Cliente implements Serializable {
 	inverseJoinColumns = @JoinColumn (name="proposta_id"))
 	private PropostaCredito proposta;
 	
-
 	public Cliente() {
 		
 	}
