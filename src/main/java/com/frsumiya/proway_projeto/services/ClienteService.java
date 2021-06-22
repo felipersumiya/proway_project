@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.frsumiya.proway_projeto.dto.ClienteDto;
 import com.frsumiya.proway_projeto.entities.Cliente;
 import com.frsumiya.proway_projeto.entities.PropostaCredito;
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
@@ -34,6 +35,11 @@ public class ClienteService {
 
 	}
 	
+	public Cliente fromDTO(ClienteDto clienteDto) {
+		
+		return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getCpf(), clienteDto.getTelefone(), clienteDto.getScore());
+		
+	}
 	
 	public static String defineSaudeCliente(Integer score) {
 		
@@ -78,8 +84,6 @@ public class ClienteService {
 		
 		
 		//A lista será populada de acordo com a saúde financeira do cliente
-		
-		
 		if(cliente.getSaudeFinanceira() == SaudeFinanceira.BOA.toString()) {
 			
 			//popular a lista
@@ -94,8 +98,7 @@ public class ClienteService {
 			
 		
 		}
-			
-			
+				
 		if(cliente.getSaudeFinanceira() == SaudeFinanceira.MEDIA.toString()) {
 			
 
@@ -111,9 +114,6 @@ public class ClienteService {
 			
 		}
 			
-			
-			
-			
 		if(cliente.getSaudeFinanceira() == SaudeFinanceira.RUIM.toString()) {
 			
 
@@ -128,15 +128,10 @@ public class ClienteService {
 			}
 			
 		}
-			
-			
-
+				
 		return listRetorno;	
 			
-		
 	}
 
-	
-	
 
 }

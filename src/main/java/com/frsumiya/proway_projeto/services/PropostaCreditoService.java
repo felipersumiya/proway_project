@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.frsumiya.proway_projeto.dto.ClienteDto;
+import com.frsumiya.proway_projeto.dto.PropostaCreditoDto;
 import com.frsumiya.proway_projeto.entities.Cliente;
 import com.frsumiya.proway_projeto.entities.PropostaCredito;
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
@@ -35,6 +37,16 @@ public class PropostaCreditoService {
 		return obj.get();
 
 	}
+	
+	
+	public PropostaCredito fromDTO(PropostaCreditoDto propostaDto) {
+
+		return new PropostaCredito(propostaDto.getId(), propostaDto.getTaxaJuros(), propostaDto.getValor(),
+				propostaDto.getCet(), propostaDto.getPrazo(), propostaDto.getParcelas());
+
+	}
+	
+	
 	
 	public static String definirSaudeProposta(Double valor) {
 		
