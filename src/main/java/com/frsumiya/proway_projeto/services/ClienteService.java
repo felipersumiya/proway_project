@@ -34,6 +34,32 @@ public class ClienteService {
 
 	}
 	
+	
+	public static String defineSaudeCliente(Integer score) {
+		
+		
+		if(score > 700) {
+			
+		    return SaudeFinanceira.BOA.toString();
+		}
+			
+		if(score <= 700 && score >= 400) {
+			
+			return  SaudeFinanceira.MEDIA.toString();
+			
+		}
+			
+		if(score < 400) {
+			
+			
+			return  SaudeFinanceira.RUIM.toString();
+		}
+		
+		return "Indefinido";
+		
+	}
+	
+	
 	//retorna uma lista de propostas de credito de acordo com o ciente.
 	public List<PropostaCredito> findPropostas(Long id){
 		

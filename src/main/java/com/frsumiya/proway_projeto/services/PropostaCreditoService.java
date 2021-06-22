@@ -36,6 +36,30 @@ public class PropostaCreditoService {
 
 	}
 	
+	public static String definirSaudeProposta(Double valor) {
+		
+		
+		if(valor > 9000.0) {
+			
+			return  SaudeFinanceira.BOA.toString();
+		}
+			
+		if(valor <= 9000.0 && valor >= 5000.0) {
+			
+			return  SaudeFinanceira.MEDIA.toString();
+			
+		}
+			
+		if(valor < 5000.0) {
+			
+			
+			return SaudeFinanceira.RUIM.toString();
+		}
+		
+		return "Indefinido";
+		
+	}
+	
 	//retorna a lista de propostas de crédito pessoal com base na saúde financeira do cliente.
 	//* Criei meus próprios parâmetros para definir a saúde financeira do cliente, divididos em : boa, média e ruim, representados pelos valores de enum (SaudeFinanceira) BOA, MEDIA e RUIM respectivamente.
 /**	public List<PropostaCredito> findPropostas(Long idCliente){

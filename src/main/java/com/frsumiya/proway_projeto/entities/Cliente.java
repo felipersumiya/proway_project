@@ -12,8 +12,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
+import com.frsumiya.proway_projeto.services.ClienteService;
 
 
 @Entity
@@ -38,7 +41,6 @@ public class Cliente implements Serializable {
 	inverseJoinColumns = @JoinColumn (name="proposta_id"))
 	private PropostaCredito proposta;
 	
-	
 
 	public Cliente() {
 		
@@ -52,25 +54,9 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 		this.score = score;
 		
+		this.saudeFinanceira = ClienteService.defineSaudeCliente(score);
 		
-		
-		//Definir a saúde financeira com base no score do cliente
-		if(this.score > 700) {
-			
-			this.saudeFinanceira = SaudeFinanceira.BOA.toString();
-		}
-			
-		if(this.score <= 700 && this.score >= 400) {
-			
-			this.saudeFinanceira = SaudeFinanceira.MEDIA.toString();
-			
-		}
-			
-		if(this.score < 400) {
-			
-			
-			this.saudeFinanceira = SaudeFinanceira.RUIM.toString();
-		}
+
 	}	
 	
 	public Long getId() {

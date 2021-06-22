@@ -2,16 +2,17 @@ package com.frsumiya.proway_projeto.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.frsumiya.proway_projeto.enuns.SaudeFinanceira;
+import com.frsumiya.proway_projeto.services.PropostaCreditoService;
 
 @Entity
 @Table (name="tb_proposta_credito")
@@ -48,24 +49,8 @@ public class PropostaCredito implements Serializable {
 		this.prazo = prazo;
 		this.parcelas = parcelas;
 		
-
-		//Definir para qual saúde financeira será designado cada valor de empréstimo pessoal.
-		if(this.valor > 9000.0) {
-			
-			this.saudeF = SaudeFinanceira.BOA.toString();
-		}
-			
-		if(this.valor <= 9000.0 && this.valor >= 5000.0) {
-			
-			this.saudeF = SaudeFinanceira.MEDIA.toString();
-			
-		}
-			
-		if(this.valor <5000.0) {
-			
-			
-			this.saudeF = SaudeFinanceira.RUIM.toString();
-		}
+		this.saudeF = PropostaCreditoService.definirSaudeProposta(this.valor);
+				
 		
 	}
 
