@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.frsumiya.proway_projeto.dto.ClienteDto;
 import com.frsumiya.proway_projeto.dto.PropostaCreditoDto;
 import com.frsumiya.proway_projeto.entities.Cliente;
@@ -54,13 +52,13 @@ public class ClienteResource {
 	}
 	
 	//Este método retornará uma lista de propostas baseadas na saúde financeira do cliente.
+	//Funcionalidade chave do sistema. Aparecerão apenas as propostas compatíveis com o cliente.
 	@GetMapping (value = "/propostas/{id}")
 	public ResponseEntity<List<PropostaCreditoDto>> findById(@PathVariable Long id ){
 		
 		
 		List<PropostaCredito> list2 = clienteService.findPropostas(id);
 		List<PropostaCreditoDto> listDto = list2.stream().map(x -> new PropostaCreditoDto(x)).collect(Collectors.toList());
-		//Cliente obj = clienteService.findById(id);
 		
 		return ResponseEntity.ok().body(listDto);
 	}
@@ -94,6 +92,18 @@ public class ClienteResource {
 		clienteService.update(id, cliente);
 		return ResponseEntity.noContent().build();
 		
+	}
+	
+	@PostMapping(value = "/cliente_proposta")
+	public ResponseEntity<Void> insertPropostaDTO( @PathVariable Long idCliente,  @PathVariable Long idProposta){
+		
+		/*Cliente cliente = clienteService.fromDTO(clienteDto);
+		clienteService.insert(cliente);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteDto.getId()).toUri();
+			*/
+		return ResponseEntity.noContent().build();
+	
 	}
 	
 

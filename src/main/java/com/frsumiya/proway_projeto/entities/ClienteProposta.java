@@ -21,14 +21,14 @@ public class ClienteProposta implements Serializable {
 	private Long id;
 	
 	private String status;
-	private Date dataInicio;
-	private Date dataFim;
+	private String  dataInicio;
+	private String dataFim;
 	
 	public ClienteProposta() {
 		
 	}
 
-	public ClienteProposta(Long id, String status, Date dataInicio, Date dataFim) {
+	public ClienteProposta(Long id, String status, String dataInicio, String dataFim) {
 		super();
 		this.id = id;
 		this.status = status;
@@ -52,19 +52,19 @@ public class ClienteProposta implements Serializable {
 		this.status = status;
 	}
 
-	public Date getDataInicio() {
+	public String getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(String dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFim() {
+	public String getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
+	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;
 	}
 
@@ -93,5 +93,6 @@ public class ClienteProposta implements Serializable {
 		return true;
 	}
 	
+
 	
 }
